@@ -1,7 +1,8 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext } from 'react'
 import { useForm } from 'react-hook-form'
 import { AuthContext } from '../_ui/ContextHook'
 import axios from 'axios'
+import { Link } from 'react-router'
 
 const Login = () => {
     const {login, setLogin} = useContext(AuthContext)
@@ -11,7 +12,7 @@ const Login = () => {
     handleSubmit, 
   } = useForm() 
 const onSubmit =async (data) => {
-      const res = await axios.post("http://127.0.0.1:8000/login/", data)
+      const res = await axios.post("http://127.0.0.1:8000/api/login/", data)
           console.log(res)
           localStorage.setItem('token',res.data.token)  
   }
@@ -31,7 +32,12 @@ const onSubmit =async (data) => {
             </div> 
 
                 <input onClick={()=> setLogin('login nai.')} className='w-full bg-amber-500 text-black text-center' type="submit" />
+        <div className='flex items-center justify-between'>
+          <Link to="/register">Register</Link>
+          <Link to="/reset-password-email">Reset password</Link>
+        </div>
         </form>
+
     </div>
   )
 }

@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useContext } from 'react'
 import { useForm } from 'react-hook-form'
 import { AuthContext } from '../_ui/ContextHook'
+import { Link } from 'react-router'
 
 const Register = () => {
 
@@ -13,7 +14,7 @@ const Register = () => {
   } = useForm()
 
   const onSubmit =async (data) => {
-      const res = await axios.post("http://127.0.0.1:8000/register/", data)
+      const res = await axios.post("http://127.0.0.1:8000/api/register/", data)
           console.log(res)  
   }
   return (
@@ -47,6 +48,10 @@ const Register = () => {
             </div>
 
                 <input className='w-full bg-amber-500 text-black text-center' type="submit" />
+                 <div className='flex items-center justify-between'>
+          <Link to="/login">Login</Link>
+          <Link to="/reset-password-email">Reset password</Link>
+        </div>
         </form>
     </div>
   )
