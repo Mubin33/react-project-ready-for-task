@@ -7,20 +7,28 @@ const Navbar = () => {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  axios.get("http://127.0.0.1:8000/profile/", {
-  headers: { Authorization: `Token ${localStorage.getItem('token')}` }
-})
-.then(res => console.log(res.data))
+  axios
+    .get("http://127.0.0.1:8000/profile/", {
+      headers: { Authorization: `Token ${localStorage.getItem("token")}` },
+    })
+    .then((res) => console.log(res.data));
 
   const handleLogout = () => {
-        axios.post("http://127.0.0.1:8000/logout/", {}, {
-        headers: { Authorization: `Token ${localStorage.getItem('token')}` }
-        }).then(() => {
+    axios
+      .post(
+        "http://127.0.0.1:8000/logout/",
+        {},
+        {
+          headers: { Authorization: `Token ${localStorage.getItem("token")}` },
+        }
+      )
+      .then(() => {
         localStorage.removeItem("token");
         navigate("/login");
-        }).catch((error) => {
+      })
+      .catch((error) => {
         console.error("Logout failed:", error);
-        });
+      });
   };
 
   return (
